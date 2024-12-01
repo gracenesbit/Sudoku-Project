@@ -22,8 +22,11 @@ class SudokuGenerator:
 	Return:
 	None
     '''
-    def __init__(self, row_length, removed_cells):
-        pass
+    def __init__(self, row_length = 9, removed_cells = 50):
+        self.row_length = row_length
+        self.removed_cells = removed_cells
+        #self.board =
+        self.box_length = self.row_length**0.5
 
     '''
 	Returns a 2D python list of numbers which represents the board
@@ -55,7 +58,10 @@ class SudokuGenerator:
 	Return: boolean
     '''
     def valid_in_row(self, row, num):
-        pass
+        for i in range(9):
+            if get_board[row][i] == num:
+                return False
+        return True
 
     '''
 	Determines if num is contained in the specified column (vertical) of the board
@@ -68,7 +74,10 @@ class SudokuGenerator:
 	Return: boolean
     '''
     def valid_in_col(self, col, num):
-        pass
+        for i in range(9):
+            if num == get_board[i][col]:
+                return False
+        return False
 
     '''
 	Determines if num is contained in the 3x3 box specified on the board
@@ -83,8 +92,14 @@ class SudokuGenerator:
 	Return: boolean
     '''
     def valid_in_box(self, row_start, col_start, num):
-        pass
-    
+        row_start = (row_start//3) * 3
+        col_start = (col_start//3) * 3
+        for i in range(3):
+            for j in range(3):
+                if num == get_board[row_start+i][col_start+j]:
+                    return False
+        return True
+
     '''
     Determines if it is valid to enter num at (row, col) in the board
     This is done by checking that num is unused in the appropriate, row, column, and box
@@ -96,7 +111,9 @@ class SudokuGenerator:
 	Return: boolean
     '''
     def is_valid(self, row, col, num):
-        pass
+        if self.valid_in_row(row, num) and self.valid_in_col(col, num) and self.valid_in_box(row, col, num):
+            return True
+        return False
 
     '''
     Fills the specified 3x3 box with values
@@ -209,3 +226,8 @@ def generate_sudoku(size, removed):
     sudoku.remove_cells()
     board = sudoku.get_board()
     return board
+
+class Cell:
+    def __init__(self, value, row, col, screen):
+        pass
+

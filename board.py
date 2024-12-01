@@ -35,3 +35,33 @@ class Board:
             pygame.draw.line(self.screen, (0, 0, 0), (i * 600 / 9, 0), (i * 600 / 9, 600), 2)
 
     def select(self, row, col):
+        pass
+    def click(self, row, col):
+        mousex, mousey = event.pos
+        if mousex in range(0, 600) and mousey in range(0, 600):
+            row = mousey // 600
+            col = mousex // 600
+            return (row, col)
+        return None
+    def clear(self):
+        pass
+    def sketch(self, value):
+        xval, yval = self.click
+        font = pygame.font.Font(None, 10)
+        text = font.render(value, True, (211, 211, 211))
+        screen.blit(text, ((xval*200) + 5, (yval*200) + 5)
+        pygame.display.update()
+
+    def place_number(self, value):
+        pass
+    def reset_to_original(self):
+        pass
+    def is_full(self):
+        pass
+    def update_board(self):
+        pass
+    def find_empty(self):
+        pass
+    def check_board(self):
+        pass
+

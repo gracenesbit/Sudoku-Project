@@ -33,3 +33,5 @@ class Board:
         # smaller vertical lines
         for i in range(1, 9):
             pygame.draw.line(self.screen, (0, 0, 0), (i * 600 / 9, 0), (i * 600 / 9, 600), 2)
+
+    def select(self, row, col):

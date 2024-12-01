@@ -25,7 +25,7 @@ class SudokuGenerator:
     def __init__(self, row_length = 9, removed_cells = 50):
         self.row_length = row_length
         self.removed_cells = removed_cells
-        #self.board =
+        self.board = np.zeros((row_length,row_length))
         self.box_length = self.row_length**0.5
 
     '''
@@ -35,7 +35,15 @@ class SudokuGenerator:
 	Return: list[list]
     '''
     def get_board(self):
-        pass
+        self.keyboard = self.board.copy()
+        for row in range(self.row_length):
+            for col in range(self.row_length):
+                if self.keyboard[row][col] == 0:
+                    numbers = random.shuffle(list(range(1,10)))
+                    for num in numbers:
+                        if self.is_valid:
+                            self.keyboard[row][col] = num
+        return self.keyboard
 
     '''
 	Displays the board to the console
@@ -126,7 +134,12 @@ class SudokuGenerator:
 	Return: None
     '''
     def fill_box(self, row_start, col_start):
-        pass
+        row_start = (row_start//200) * 2
+        col_start = (col_start//200) * 2
+        for i in range(row_start, row_start + 2):
+            for j in range(col_start, col_start + 2):
+                self.board[i][j] = self.get_board[i][j]
+        return self.board
     
     '''
     Fills the three boxes along the main diagonal of the board
@@ -136,7 +149,16 @@ class SudokuGenerator:
 	Return: None
     '''
     def fill_diagonal(self):
-        pass
+        for i in range(0,3):
+            for j in range(0,3):
+                self.board[i][j] = self.get_board[i][j]
+        for i in range(3,6):
+            for j in range(3,6):
+                self.board[i][j] = self.get_board[i][j]
+        for i in range(6,9):
+            for j in range(6,9):
+                self.board[i][j] = self.get_board[i][j]
+        return self.board
 
     '''
     DO NOT CHANGE
@@ -202,7 +224,14 @@ class SudokuGenerator:
 	Return: None
     '''
     def remove_cells(self):
-        pass
+        removed = 0
+        while removed < self.removed_cells:
+            row = random.randint(0, self.row_length - 1)
+            col = random.randint(0, self.row_length - 1)
+            if self.board[row][col] != 0:
+                self.board[row][col] = 0
+                removed += 1
+        return self.board
 
 '''
 DO NOT CHANGE
@@ -226,8 +255,3 @@ def generate_sudoku(size, removed):
     sudoku.remove_cells()
     board = sudoku.get_board()
     return board
-
-class Cell:
-    def __init__(self, value, row, col, screen):
-        pass
-

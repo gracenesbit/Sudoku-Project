@@ -63,7 +63,11 @@ class Board:
         self.current_board = [row[:] for row in self.original_board]
         print("Board is reset.")
     def is_full(self):
-        pass
+        test = SudokuGenerator.get_board()
+        for row in test:
+            for col in test:
+                if test[row][col] == 0: return False
+        return True
     def update_board(self):
         pass
     def find_empty(self):

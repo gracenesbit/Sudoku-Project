@@ -53,7 +53,9 @@ class SudokuGenerator:
 	Return: None
     '''
     def print_board(self):
-        pass
+        for row in range(self.board):
+            print(" ".join(str(cell) if cell != 0 else "." for cell in row))
+            
 
     '''
 	Determines if num is contained in the specified row (horizontal) of the board

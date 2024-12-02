@@ -39,7 +39,7 @@ class Board:
         height = 600 / 9
         x = col * width
         y = row * height
-        pygame.draw.rect(self.screen, (255, 0, 0), (x, y, cell_width, cell_height), 3)
+        pygame.draw.rect(self.screen, (255, 0, 0), (x, y, width, height), 3)
 
     def click(self, row, col):
         mousex, mousey = event.pos

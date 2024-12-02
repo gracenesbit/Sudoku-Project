@@ -8,6 +8,10 @@ class Board:
         self.height = height
         self.screen = screen
         self.difficulty = difficulty
+
+    def select(self, row, col):
+        self.row1 = row
+        self.col1 = col
     def draw(self):
         reset = pygame.font.SysFont('Arial', 30)
         reset_screen = reset.render('Reset', False, (0, 0, 0))
@@ -33,9 +37,14 @@ class Board:
         # smaller vertical lines
         for i in range(1, 9):
             pygame.draw.line(self.screen, (0, 0, 0), (i * 600 / 9, 0), (i * 600 / 9, 600), 2)
+        # puts red highlighted box around
+        if self.selected_row is not None and self.selected_col is not None:
+            width = 600 / 9
+            height = 600 / 9
+            x = self.col1 * width
+            y = self.row1 * height
+            pygame.draw.rect(self.screen, (255, 0, 0), (x, y, cell_width, cell_height), 3)
 
-    def select(self, row, col):
-        pass
     def click(self, row, col):
         mousex, mousey = event.pos
         if mousex in range(0, 600) and mousey in range(0, 600):

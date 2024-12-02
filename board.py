@@ -61,7 +61,9 @@ class Board:
     def update_board(self):
         pass
     def find_empty(self):
-        pass
+        for row in self.cells:
+            for cell in row:
+                self.board[cell.row][cell.col] = cell.value
     def check_board(self):
         pass
 

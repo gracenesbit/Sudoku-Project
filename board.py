@@ -35,7 +35,12 @@ class Board:
             pygame.draw.line(self.screen, (0, 0, 0), (i * 600 / 9, 0), (i * 600 / 9, 600), 2)
 
     def select(self, row, col):
-        pass
+        width = 600 / 9
+        height = 600 / 9
+        x = col * width
+        y = row * height
+        pygame.draw.rect(self.screen, (255, 0, 0), (x, y, cell_width, cell_height), 3)
+
     def click(self, row, col):
         mousex, mousey = event.pos
         if mousex in range(0, 600) and mousey in range(0, 600):

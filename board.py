@@ -55,7 +55,8 @@ class Board:
     def place_number(self, value):
         pass
     def reset_to_original(self):
-        pass
+        self.current_board = [row[:] for row in self.original_board]
+        print("Board is reset.")
     def is_full(self):
         pass
     def update_board(self):

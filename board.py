@@ -8,6 +8,7 @@ class Board:
         self.height = height
         self.screen = screen
         self.difficulty = difficulty
+        self.selected = None
     def draw(self):
         reset = pygame.font.SysFont('Arial', 30)
         reset_screen = reset.render('Reset', False, (0, 0, 0))
@@ -49,7 +50,7 @@ class Board:
             self.selected = (row, col)
             return (row, col)
         else: 
-            self.selected = none
+            self.selected = None
             return None
     def clear(self):
         pass

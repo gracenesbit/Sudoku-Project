@@ -46,8 +46,11 @@ class Board:
         if mousex in range(0, 600) and mousey in range(0, 600):
             row = mousey // 600
             col = mousex // 600
+            self.selected = (row, col)
             return (row, col)
-        return None
+        else: 
+            self.selected = none
+            return None
     def clear(self):
         pass
     def sketch(self, value):
@@ -58,7 +61,14 @@ class Board:
         pygame.display.update()
 
     def place_number(self, value):
-        pass
+        if self.selected:
+            row, col = self.selected
+            if self.original_board[row][col] == 0:
+                self.board[row][col] = value
+                self.draw()
+                self.select(row, col)  
+                self.draw_number(value, row, col)
+                pygame.display.update()
     def reset_to_original(self):
         self.current_board = [row[:] for row in self.original_board]
         print("Board is reset.")

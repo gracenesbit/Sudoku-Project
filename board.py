@@ -48,12 +48,8 @@ class Board:
             row = mousey // 600
             col = mousex // 600
             self.selected = (row, col)
-            return (row, col)
-<<<<<<< HEAD
+            return self.selected
         else:
-=======
-        else: 
->>>>>>> 2fe6d66b1b22571699efdf49f79183d67ae9908b
             self.selected = None
             return None
     def clear(self):
@@ -71,11 +67,7 @@ class Board:
             if self.original_board[row][col] == 0:
                 self.board[row][col] = value
                 self.draw()
-<<<<<<< HEAD
                 self.select(row, col)
-=======
-                self.select(row, col)  
->>>>>>> 2fe6d66b1b22571699efdf49f79183d67ae9908b
                 self.draw_number(value, row, col)
                 pygame.display.update()
     def reset_to_original(self):

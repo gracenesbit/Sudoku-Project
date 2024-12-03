@@ -43,7 +43,7 @@ class Board:
         pygame.draw.rect(self.screen, (255, 0, 0), (x, y, width, height), 3)
 
     def click(self, row, col):
-        mousex, mousey = event.pos
+        mousex, mousey = row, col
         if mousex in range(0, 600) and mousey in range(0, 600):
             row = mousey // 600
             col = mousex // 600

@@ -8,10 +8,7 @@ class Board:
         self.height = height
         self.screen = screen
         self.difficulty = difficulty
-
-    def select(self, row, col):
-        self.row1 = row
-        self.col1 = col
+        self.selected = None
     def draw(self):
         reset = pygame.font.SysFont('Arial', 30)
         reset_screen = reset.render('Reset', False, (0, 0, 0))
@@ -37,21 +34,24 @@ class Board:
         # smaller vertical lines
         for i in range(1, 9):
             pygame.draw.line(self.screen, (0, 0, 0), (i * 600 / 9, 0), (i * 600 / 9, 600), 2)
-        # puts red highlighted box around
-        if self.selected_row is not None and self.selected_col is not None:
-            width = 600 / 9
-            height = 600 / 9
-            x = self.col1 * width
-            y = self.row1 * height
-            pygame.draw.rect(self.screen, (255, 0, 0), (x, y, cell_width, cell_height), 3)
+
+    def select(self, row, col):
+        width = 600 / 9
+        height = 600 / 9
+        x = col * width
+        y = row * height
+        pygame.draw.rect(self.screen, (255, 0, 0), (x, y, width, height), 3)
 
     def click(self, row, col):
         mousex, mousey = event.pos
         if mousex in range(0, 600) and mousey in range(0, 600):
             row = mousey // 600
             col = mousex // 600
+            self.selected = (row, col)
             return (row, col)
-        return None
+        else:
+            self.selected = None
+            return None
     def clear(self):
         pass
     def sketch(self, value):
@@ -62,9 +62,17 @@ class Board:
         pygame.display.update()
 
     def place_number(self, value):
-        pass
+        if self.selected:
+            row, col = self.selected
+            if self.original_board[row][col] == 0:
+                self.board[row][col] = value
+                self.draw()
+                self.select(row, col)
+                self.draw_number(value, row, col)
+                pygame.display.update()
     def reset_to_original(self):
-        pass
+        self.current_board = [row[:] for row in self.original_board]
+        print("Board is reset.")
     def is_full(self):
         test = SudokuGenerator.get_board()
         for row in test:
@@ -74,7 +82,8 @@ class Board:
     def update_board(self):
         pass
     def find_empty(self):
-        pass
+        for row in self.cells:
+            for cell in row:
+                self.board[cell.row][cell.col] = cell.value
     def check_board(self):
         pass
-

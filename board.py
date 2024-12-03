@@ -49,11 +49,7 @@ class Board:
             col = mousex // 600
             self.selected = (row, col)
             return (row, col)
-<<<<<<< HEAD
-        else:
-=======
         else: 
->>>>>>> 2fe6d66b1b22571699efdf49f79183d67ae9908b
             self.selected = None
             return None
     def clear(self):

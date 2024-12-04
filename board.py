@@ -67,8 +67,11 @@ class Board:
             if self.original_board[row][col] == 0:
                 self.board[row][col] = value
                 self.draw()
-                self.select(row, col)
-                self.draw_number(value, row, col)
+                font = pygame.font.SysFont('Arial', 40)
+                text = font.render(value, True, (255, 255, 255))
+                x = col * 50 + 25 - text.get_width() / 2
+                y = row * 50 + 25 - text.get_height() / 2
+                self.screen.blit(text, (x, y))
                 pygame.display.update()
     def reset_to_original(self):
         self.current_board = [row[:] for row in self.original_board]

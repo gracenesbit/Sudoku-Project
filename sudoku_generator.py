@@ -26,7 +26,7 @@ class SudokuGenerator:
         self.row_length = row_length
         self.removed_cells = removed_cells
         self.board = np.zeros((row_length,row_length))
-        self.box_length = self.row_length**0.5
+        self.box_length = int(math.sqrt(row_length))
 
     '''
 	Returns a 2D python list of numbers which represents the board

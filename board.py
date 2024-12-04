@@ -79,8 +79,7 @@ class Board:
                 self.screen.blit(text, (x, y))
                 pygame.display.update()
     def reset_to_original(self):
-        self.current_board = [row[:] for row in self.original_board]
-        print("Board is reset.")
+        self.board = [row[:] for row in self.original_board]
     def is_full(self):
         test = SudokuGenerator.get_board()
         for row in test:

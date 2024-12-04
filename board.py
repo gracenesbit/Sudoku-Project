@@ -9,8 +9,8 @@ class Board:
         self.screen = screen
         self.difficulty = difficulty
         self.selected = None
-        self.board = [[0] * 9 for _ in range(9)]
-        self.original_board = [[0] * 9 for _ in range(9)]
+        self.board = [[0] * 9 for i in range(9)]
+        self.original_board = [[0] * 9 for i in range(9)]
     def draw(self):
         reset = pygame.font.SysFont('Arial', 30)
         reset_screen = reset.render('Reset', False, (0, 0, 0))

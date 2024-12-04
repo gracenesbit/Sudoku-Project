@@ -4,11 +4,13 @@ pygame.init()
 
 class Board:
     def __init__(self, width, height, screen, difficulty):
-        self.width = width
+       elf.width = width
         self.height = height
         self.screen = screen
         self.difficulty = difficulty
         self.selected = None
+        self.board = [[0] * 9 for _ in range(9)]
+        self.original_board = [[0] * 9 for _ in range(9)]
     def draw(self):
         reset = pygame.font.SysFont('Arial', 30)
         reset_screen = reset.render('Reset', False, (0, 0, 0))
@@ -53,7 +55,10 @@ class Board:
             self.selected = None
             return None
     def clear(self):
-        pass
+        if self.selected:
+            row, col = self.selected
+            if self.original_board[row][col] == 0:
+                self.board[row][col] = 0
     def sketch(self, value):
         xval, yval = self.click
         font = pygame.font.Font(None, 10)
@@ -83,10 +88,39 @@ class Board:
                 if test[row][col] == 0: return False
         return True
     def update_board(self):
-        pass
+               for row in range(9):
+            for col in range(9):
+                self.original_board[row][col] = self.board[row][col]
     def find_empty(self):
-        for row in self.cells:
-            for cell in row:
-                self.board[cell.row][cell.col] = cell.value
+         for row in range(9):
+            for col in range(9):
+                if self.board[row][col] == 0:  
+                    return row, col
     def check_board(self):
-        pass
+         for row in range(9):
+            value = set()
+            for num in self.board[row]:
+                if num != 0:
+                    if num in value or not (1 <= num <= 9):
+                        return False
+                    value.add(num)
+        for col in range(9):
+            value = set()
+            for row in range(9):
+                num = self.board[row][col]
+                if num != 0:
+                    if num in value or not (1 <= num <= 9):
+                        return False
+                    value.add(num)
+        for start_row in range(0, 9, 3):
+            for start_col in range(0, 9, 3):
+                value = set()
+                for row in range(3):
+                    for col in range(3):
+                        num = self.board[start_row + row][start_col + col]
+                        if num != 0:
+                            if num in value or not (1 <= num <= 9):
+                                return False
+                            value.add(num)
+
+        return True

@@ -102,24 +102,19 @@ class Board:
                 if num != 0:
                     if num in value or not (1 <= num <= 9):
                         return False
-                    value.add(num)
-        for col in range(9):
-            value = set()
-            for row in range(9):
-                num = self.board[row][col]
-                if num != 0:
-                    if num in value or not (1 <= num <= 9):
-                        return False
-                    value.add(num)
-        for start_row in range(0, 9, 3):
-            for start_col in range(0, 9, 3):
+            for col in range(9):
                 value = set()
-                for row in range(3):
-                    for col in range(3):
-                        num = self.board[start_row + row][start_col + col]
-                        if num != 0:
-                            if num in value or not (1 <= num <= 9):
-                                return False
-                            value.add(num)
-
-        return True
+                for num in self.board[col]:
+                    if num != 0:
+                        if num in value or not (1 <= num <= 9):
+                            return False
+            for start_row in range(0,3,9):
+                for start_col in range(0,3,9):
+                    value = set()
+                    for row in range(3):
+                        for col in range(3):
+                            num = self.board[start_row + row][start_col + col]
+                            if num != 0:
+                                if num in value or not (1 <= num <= 9):
+                                    return False
+            return True

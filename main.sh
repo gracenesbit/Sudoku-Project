@@ -81,13 +81,6 @@ def draw_game_over_screen(won):
     pygame.display.flip()
 
 
-def draw_pause_screen():
-    screen.fill(BG_COLOR)
-    draw_text("Game Paused", font, TEXT_COLOR, 200, 250, screen)
-    draw_text("Press P to Resume", button_font, TEXT_COLOR, 175, 425, screen)
-    pygame.display.flip()
-
-
 def main():
     running = True
     game_in_progress = False
@@ -95,10 +88,9 @@ def main():
     board = None
 
     while running:
-        if not game_in_progress and not game_paused:
+        if not game_in_progress:
             draw_start_screen()
-        elif game_paused:
-            draw_pause_screen()
+        
         else:
             screen.fill(BG_COLOR)
             board.draw()
@@ -153,10 +145,6 @@ def main():
                 ]
                 game_in_progress = True
 
-
-            if game_in_progress and event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_p:
-                    game_paused = not game_paused
 
 
             if game_in_progress and not game_paused:

@@ -1,4 +1,6 @@
-import math,random
+import math
+import random 
+import numpy as np
 
 """
 This was adapted from a GeeksforGeeks article "Program for Sudoku Generator" by Aarti_Rathi and Ankur Trisal
